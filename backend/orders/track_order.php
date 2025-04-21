@@ -1,24 +1,22 @@
- 
 <?php
-session_start();
+// backend/track_order.php
+
 include '../db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $order_id = $_POST['order_id'];
-
-    $query = "SELECT * FROM orders WHERE order_id = '$order_id'";
+if (isset($_GET['order_id'])) {
+    $order_id = intval($_GET['order_id']);
+    $query = "SELECT orders.status, orders.order_date, restaurants.name AS restaurant_name
+              FROM orders 
+              JOIN restaurants ON orders.restaurant_id = restaurants.restaurant_id
+              WHERE order_id = $order_id";
+    
     $result = $conn->query($query);
-
-    if ($result->num_rows > 0) {
-        $order = $result->fetch_assoc();
-        echo "<h1>Order Status: " . $order['status'] . "</h1>";
+    if ($row = $result->fetch_assoc()) {
+        echo json_encode($row);
     } else {
-        echo "Order not found!";
+        echo json_encode(['error' => 'Order not found']);
     }
+} else {
+    echo json_encode(['error' => 'No order ID provided']);
 }
 ?>
-
-<form method="POST">
-    Order ID: <input type="number" name="order_id" required>
-    <input type="submit" value="Track Order">
-</form>
