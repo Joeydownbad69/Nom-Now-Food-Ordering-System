@@ -1,5 +1,6 @@
 import { SearchIcon } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
@@ -23,6 +24,7 @@ export const LandingPage = (): JSX.Element => {
     (page - 1) * MEALS_PER_PAGE,
     page * MEALS_PER_PAGE
   );
+  const navigate = useNavigate();
   return (
     <main className="bg-[#ebebeb] min-h-screen w-full min-w-full">
       {/* Header/Navigation */}
@@ -34,6 +36,12 @@ export const LandingPage = (): JSX.Element => {
         />
 
         <div className="flex items-center gap-2 md:gap-6">
+          <Button
+            className="bg-[#ff9d23] text-white px-4 py-2 rounded hover:bg-[#e08a1f] transition"
+            onClick={() => navigate("/restaurant-portal")}
+          >
+            Restaurant Portal
+          </Button>
           <div className="relative">
             <Input
               className="h-8 md:h-9 w-[200px] md:w-[263px] bg-[#d9d9d9] rounded-[666.67px] pr-10"
@@ -191,8 +199,7 @@ export const LandingPage = (): JSX.Element => {
             <Button
               onClick={() => setPage(page + 1)}
               disabled={page === totalPages}
-              variant="secondary"
-            >
+              variant="secondary"            >
               Next
             </Button>
           </div>  
