@@ -1,18 +1,27 @@
 "use client";
 
+<<<<<<< HEAD
 import { createContext, useState, useEffect, ReactNode, useContext } from "react";
 import { User, AuthState } from "@/types/user";
 import { useRouter, usePathname } from "next/navigation";
+=======
+import { createContext, useState, useEffect, ReactNode } from "react";
+import { User, AuthState } from "@/types/user";
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
   isLoading: boolean;
   error: string | null;
+<<<<<<< HEAD
   userRole: 'customer' | 'admin' | 'restaurant' | null;
   login: (email: string, password: string) => Promise<void>;
   adminLogin: (email: string, password: string) => Promise<void>;
   restaurantLogin: (email: string, password: string, restaurantId: string) => Promise<void>;
+=======
+  login: (email: string, password: string) => Promise<void>;
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   updateUser: (userData: Partial<User>) => Promise<void>;
@@ -23,10 +32,14 @@ export const AuthContext = createContext<AuthContextType>({
   token: null,
   isLoading: false,
   error: null,
+<<<<<<< HEAD
   userRole: null,
   login: async () => {},
   adminLogin: async () => {},
   restaurantLogin: async () => {},
+=======
+  login: async () => {},
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   register: async () => {},
   logout: () => {},
   updateUser: async () => {},
@@ -37,22 +50,32 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+<<<<<<< HEAD
   const router = useRouter();
   const pathname = usePathname();
   
   const [authState, setAuthState] = useState<AuthState & { userRole: 'customer' | 'admin' | 'restaurant' | null }>({
+=======
+  const [authState, setAuthState] = useState<AuthState>({
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
     user: null,
     token: null,
     isLoading: true,
     error: null,
+<<<<<<< HEAD
     userRole: null,
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   });
   
   // Check for existing session on load
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
+<<<<<<< HEAD
     const storedRole = localStorage.getItem("userRole");
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
     
     if (storedUser && storedToken) {
       setAuthState({
@@ -60,13 +83,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         token: storedToken,
         isLoading: false,
         error: null,
+<<<<<<< HEAD
         userRole: (storedRole as 'customer' | 'admin' | 'restaurant' | null),
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
       });
     } else {
       setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   }, []);
   
+<<<<<<< HEAD
   // Protect routes based on authentication and role
   useEffect(() => {
     if (authState.isLoading) return;
@@ -91,6 +118,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [pathname, authState.isLoading, authState.userRole, authState.token, router]);
   
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   // For demo purposes, using mock data
   // In a real application, this would be API calls
   const login = async (email: string, password: string) => {
@@ -113,14 +142,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Store in localStorage (would use cookies in production)
         localStorage.setItem("user", JSON.stringify(mockUser));
         localStorage.setItem("token", mockToken);
+<<<<<<< HEAD
         localStorage.setItem("userRole", "customer");
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
         
         setAuthState({
           user: mockUser,
           token: mockToken,
           isLoading: false,
           error: null,
+<<<<<<< HEAD
           userRole: "customer",
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
         });
       } else {
         throw new Error("Invalid email or password");
@@ -134,6 +169,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
   
+<<<<<<< HEAD
   // Admin login
   const adminLogin = async (email: string, password: string) => {
     setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -219,6 +255,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
   
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   const register = async (name: string, email: string, password: string) => {
     setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
     
@@ -238,14 +276,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Store in localStorage (would use cookies in production)
       localStorage.setItem("user", JSON.stringify(mockUser));
       localStorage.setItem("token", mockToken);
+<<<<<<< HEAD
       localStorage.setItem("userRole", "customer");
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
       
       setAuthState({
         user: mockUser,
         token: mockToken,
         isLoading: false,
         error: null,
+<<<<<<< HEAD
         userRole: "customer",
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
       });
     } catch (error) {
       setAuthState(prev => ({
@@ -260,8 +304,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Clear stored data
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+<<<<<<< HEAD
     localStorage.removeItem("userRole");
     localStorage.removeItem("restaurantId");
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
     
     // Reset state
     setAuthState({
@@ -269,6 +316,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       token: null,
       isLoading: false,
       error: null,
+<<<<<<< HEAD
       userRole: null,
     });
     
@@ -280,6 +328,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } else {
       router.push('/login');
     }
+=======
+    });
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   };
   
   const updateUser = async (userData: Partial<User>) => {
@@ -309,6 +360,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
   
+<<<<<<< HEAD
   // Show loading spinner while checking authentication
   if (authState.isLoading) {
     return (
@@ -324,6 +376,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     );
   }
   
+=======
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
   return (
     <AuthContext.Provider
       value={{
@@ -331,10 +385,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         token: authState.token,
         isLoading: authState.isLoading,
         error: authState.error,
+<<<<<<< HEAD
         userRole: authState.userRole,
         login,
         adminLogin,
         restaurantLogin,
+=======
+        login,
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
         register,
         logout,
         updateUser,
@@ -343,6 +401,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       {children}
     </AuthContext.Provider>
   );
+<<<<<<< HEAD
 }
 
 export const useAuth = () => useContext(AuthContext);
+=======
+}
+>>>>>>> 3f52ad7ce487263c81a87a85f218156957647adb
