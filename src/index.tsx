@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LandingPage } from "./screens/LandingPage";
+// import { LandingPage } from "./screens/LandingPage";
 // import { MenuManagement } from "./screens/AdminPage/MenuManagement"; // No longer used directly
 import { RestaurantPortal } from "./screens/RestaurantPortal/RestaurantPortal";
 import { AdminLogin } from "./screens/AdminPage/AdminLogin";
@@ -34,7 +34,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        {/* Removed LandingPage route */}
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={
           <AdminRoute>

@@ -52,11 +52,11 @@ export function CartProvider({ children }: CartProviderProps) {
     const storedRestaurant = localStorage.getItem("restaurant");
     
     if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+      setCartItems(storedCart ? JSON.parse(storedCart) : []);
     }
     
     if (storedRestaurant) {
-      setRestaurant(JSON.parse(storedRestaurant));
+      setRestaurant(storedRestaurant ? JSON.parse(storedRestaurant) : null);
     }
   }, []);
   

@@ -44,7 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     
     if (storedUser && storedToken) {
       setAuthState({
-        user: JSON.parse(storedUser),
+        user: storedUser ? JSON.parse(storedUser) : null,
         token: storedToken,
         isLoading: false,
         error: null,
