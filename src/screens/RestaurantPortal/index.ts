@@ -1,0 +1,1 @@
+export { RestaurantPortal } from './RestaurantPortal';
