@@ -1,1 +1,0 @@
-export { RestaurantDashboard } from './RestaurantDashboard';
