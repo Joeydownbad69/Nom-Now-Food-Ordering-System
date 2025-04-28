@@ -75,7 +75,6 @@ export default function RestaurantInfo({ restaurant, onClose }: RestaurantInfoPr
               </div>
               <div className="flex items-center">
                 <span className="font-medium mr-2">Minimum Order:</span>
-                <span>${restaurant.minOrder.toFixed(2)}</span>
               </div>
               <div className="flex items-center">
                 <span className="font-medium mr-2">Delivery Fee:</span>
